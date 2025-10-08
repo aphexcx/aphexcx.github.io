@@ -1,0 +1,310 @@
+/*
+ * Global Stylesheet for Afik Cohen's personal website
+ *
+ * The site uses a dark, futuristic palette inspired by Afik's work in AI and
+ * hardware projects. Layouts are responsive and adapt gracefully to
+ * smaller screens. Feel free to tweak the color variables at the top to
+ * customize the theme.
+ */
+
+/* Root variables for easy theme adjustments */
+:root {
+    /* Light, minimal theme inspired by academic portfolios */
+    --color-bg: #f9fafc;
+    --color-surface: #ffffff;
+    --color-primary: #0066cc;
+    --color-primary-dark: #005bb5;
+    --color-text: #1a1a1a;
+    --color-muted: #636f83;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* Navigation bar */
+nav {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: var(--color-bg);
+    z-index: 1000;
+    border-bottom: 1px solid #e5eaf2;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+}
+
+nav .logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-links li a:hover {
+    color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 1rem;
+    }
+    .nav-container {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Experience section styling */
+#experience .job {
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--color-primary);
+}
+
+#experience .job h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+#experience .job .job-dates {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+#experience .job ul {
+    margin-left: 1rem;
+    list-style: disc;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+#experience .job ul li {
+    margin-bottom: 0.4rem;
+}
+
+/* Hero section */
+#hero {
+    padding: 6rem 1.5rem 4rem;
+    text-align: center;
+    background: var(--color-bg);
+}
+
+/* Hero text */
+#hero .name {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+}
+
+#hero .tagline {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+#hero .summary {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--color-muted);
+}
+
+.cta-buttons .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    margin: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.btn.secondary {
+    background-color: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+}
+
+.btn:hover {
+    background-color: var(--color-primary-dark);
+    color: #fff;
+}
+
+.btn.secondary:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+main {
+    padding: 2rem 3rem;
+}
+
+section {
+    margin-bottom: 4rem;
+}
+
+section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* About section styling */
+#about p {
+    margin-bottom: 1rem;
+    max-width: 900px;
+}
+
+/* Projects grid */
+.projects-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.project-card {
+    background-color: var(--color-surface);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.project-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.project-card h3 {
+    margin: 1rem;
+    font-size: 1.3rem;
+    color: var(--color-primary);
+}
+
+.project-card p {
+    margin: 0 1rem 1.5rem;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+}
+
+/* Blog list */
+#blog ul.blog-list {
+    margin-left: 1rem;
+    list-style: disc;
+}
+
+#blog ul.blog-list li {
+    margin-bottom: 0.4rem;
+}
+
+#blog a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+#blog a:hover {
+    text-decoration: underline;
+}
+
+/* Social icons */
+.social-links {
+    margin-top: 1rem;
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.social-links a img {
+    width: 24px;
+    height: 24px;
+    /* Tint icons to the primary colour */
+    filter: invert(29%) sepia(64%) saturate(672%) hue-rotate(190deg) brightness(96%) contrast(86%);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover img {
+    /* Slightly darker tint on hover */
+    filter: invert(39%) sepia(78%) saturate(800%) hue-rotate(190deg) brightness(90%) contrast(95%);
+    transform: scale(1.15);
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid #e5eaf2;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    #hero .name {
+        font-size: 2.3rem;
+    }
+    #hero .tagline {
+        font-size: 1.2rem;
+    }
+    #hero .summary {
+        font-size: 0.9rem;
+    }
+    main {
+        padding: 1rem 1.2rem;
+    }
+    .project-card img {
+        height: 150px;
+    }
+    .projects-grid {
+        gap: 1.5rem;
+    }
+}
