@@ -2,7 +2,6 @@
 tags: about
 permalink: false
 ---
-
 ## About
 
 Hi, I'm Afik (rhymes with `seek`)! I'm an SF-based builder and until recently, have been working on [Fairbrook AI](https://fairbrook.ai). Before that, I co-founded [Codeflash](https://codeflash.ai) and was an early employee at [Perplexity](https://perplexity.ai).

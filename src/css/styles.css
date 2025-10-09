@@ -9,13 +9,15 @@
 
 /* Root variables for easy theme adjustments */
 :root {
-    /* Light, minimal theme inspired by academic portfolios */
-    --color-bg: #f9fafc;
-    --color-surface: #ffffff;
-    --color-primary: #0066cc;
-    --color-primary-dark: #005bb5;
-    --color-text: #1a1a1a;
-    --color-muted: #636f83;
+    /* Dark, sleek theme with gold and cyan accents */
+    --color-bg: #1a1a2e;
+    --color-surface: #16213e;
+    --color-primary: #d4af37;
+    --color-primary-dark: #b8941f;
+    --color-accent: #00d9ff;
+    --color-text: #f5f5f5;
+    --color-muted: #a8a8a8;
+    --color-border: #2a2a4a;
 }
 
 * {
@@ -25,7 +27,7 @@
 }
 
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
     background-color: var(--color-bg);
     color: var(--color-text);
     line-height: 1.6;
@@ -37,9 +39,12 @@ nav {
     position: sticky;
     top: 0;
     width: 100%;
-    background: var(--color-bg);
+    background: rgba(42, 42, 74, 0.7);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
     z-index: 1000;
-    border-bottom: 1px solid #e5eaf2;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
 .nav-container {
@@ -56,6 +61,23 @@ nav .logo {
     font-weight: 700;
     color: var(--color-primary);
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: opacity 0.3s ease;
+}
+
+nav .logo:hover {
+    opacity: 0.8;
+}
+
+nav .logo-photo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .nav-links {
@@ -73,6 +95,7 @@ nav .logo {
 
 .nav-links li a:hover {
     color: var(--color-primary);
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -88,7 +111,7 @@ nav .logo {
 #experience .job {
     margin-bottom: 2rem;
     padding-left: 1rem;
-    border-left: 3px solid var(--color-primary);
+    border-left: 3px solid var(--color-accent);
 }
 
 #experience .job h3 {
@@ -128,7 +151,8 @@ nav .logo {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 3px solid var(--color-primary);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
 }
 
 /* Hero text */
@@ -162,28 +186,35 @@ nav .logo {
     margin: 0.5rem;
     font-weight: 600;
     text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .btn {
     background-color: var(--color-primary);
-    color: #fff;
+    color: #1a1a2e;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
 }
 
 .btn.secondary {
     background-color: transparent;
-    border: 2px solid var(--color-primary);
-    color: var(--color-primary);
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
 }
 
 .btn:hover {
     background-color: var(--color-primary-dark);
-    color: #fff;
+    color: #1a1a2e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
 }
 
 .btn.secondary:hover {
-    background-color: var(--color-primary);
-    color: #fff;
+    background-color: var(--color-accent);
+    color: #1a1a2e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 217, 255, 0.4);
 }
 
 main {
@@ -201,10 +232,33 @@ section h2 {
     font-weight: 600;
 }
 
+/* Global link styling for markdown content */
+main a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+main a:hover {
+    color: var(--color-primary-dark);
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
 /* About section styling */
 #about p {
     margin-bottom: 1rem;
     max-width: 900px;
+}
+
+#about a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#about a:hover {
+    color: var(--color-primary-dark);
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 /* Projects grid */
@@ -216,15 +270,17 @@ section h2 {
 
 .project-card {
     background-color: var(--color-surface);
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
 .project-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
 }
 
 .project-card img {
@@ -258,10 +314,12 @@ section h2 {
 #blog a {
     color: var(--color-primary);
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 #blog a:hover {
-    text-decoration: underline;
+    color: var(--color-primary-dark);
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 /* Social icons */
@@ -278,21 +336,22 @@ section h2 {
 .social-links a img {
     width: 24px;
     height: 24px;
-    /* Tint icons to the primary colour */
-    filter: invert(29%) sepia(64%) saturate(672%) hue-rotate(190deg) brightness(96%) contrast(86%);
+    /* Tint icons to gold */
+    filter: invert(73%) sepia(45%) saturate(446%) hue-rotate(5deg) brightness(93%) contrast(87%);
     transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .social-links a:hover img {
-    /* Slightly darker tint on hover */
-    filter: invert(39%) sepia(78%) saturate(800%) hue-rotate(190deg) brightness(90%) contrast(95%);
+    /* Brighter gold on hover */
+    filter: invert(83%) sepia(55%) saturate(546%) hue-rotate(5deg) brightness(103%) contrast(97%);
     transform: scale(1.15);
+    drop-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 }
 
 footer {
     text-align: center;
     padding: 1rem 0;
-    border-top: 1px solid #e5eaf2;
+    border-top: 1px solid var(--color-border);
     font-size: 0.8rem;
     color: var(--color-muted);
 }
