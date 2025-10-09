@@ -1,0 +1,19 @@
+{
+  "name": "afik-website",
+  "version": "1.0.0",
+  "description": "Personal website for Afik Cohen",
+  "scripts": {
+    "build:ts": "tsc",
+    "build:11ty": "eleventy",
+    "build": "npm run build:ts && npm run build:11ty",
+    "start": "eleventy --serve",
+    "clean": "rm -rf _site dist"
+  },
+  "keywords": [],
+  "author": "Afik Cohen",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}

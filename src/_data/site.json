@@ -1,0 +1,19 @@
+{
+  "title": "Afik Cohen | Software Engineer",
+  "author": "Afik Cohen",
+  "description": "Software & ML Engineer building the future of software",
+  "url": "https://afikcohen.com",
+  "email": "afik@yourdomain.com",
+  "social": {
+    "twitter": "https://twitter.com/aphexcohen",
+    "instagram": "https://instagram.com/aphexcohen",
+    "github": "https://github.com/aphexcohen",
+    "linkedin": "https://www.linkedin.com/in/afikcohen",
+    "blog": "https://aphex.cx"
+  },
+  "hero": {
+    "name": "Afik Cohen",
+    "tagline": "Software & ML Engineer",
+    "summary": "Building the future of software by combining mobile, machine learning and interactive art. Currently working on AI‑powered developer tools and large‑scale mobile apps."
+  }
+}

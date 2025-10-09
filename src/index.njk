@@ -1,0 +1,59 @@
+---
+layout: base.njk
+title: Afik Cohen | Software Engineer
+---
+
+<!-- Hero section -->
+<header id="hero">
+    <img src="/assets/profile.jpg" alt="Afik Cohen" class="profile-photo" />
+    <h1 class="name">{{ site.hero.name }}</h1>
+    <p class="tagline">{{ site.hero.tagline }}</p>
+    <p class="summary">{{ site.hero.summary }}</p>
+    <div class="cta-buttons">
+        <a href="#contact" class="btn">Get in Touch</a>
+        <a href="{{ site.social.linkedin }}" class="btn secondary" target="_blank">View LinkedIn</a>
+    </div>
+</header>
+
+<main>
+    <!-- About section -->
+    <section id="about">
+        {{ collections.about[0].content | safe }}
+    </section>
+
+    <!-- Projects section -->
+    <section id="projects">
+        {{ collections.projects[0].content | safe }}
+    </section>
+
+    <!-- Writing section -->
+    <section id="blog">
+        {{ collections.writing[0].content | safe }}
+    </section>
+
+    <!-- Contact section -->
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Interested in collaborating or just want to say hi? Reach out via social media or email.</p>
+        <div class="social-links">
+            <a href="mailto:{{ site.email }}" title="Email">
+                <img src="/assets/icons/envelope.svg" alt="Email" width="24" height="24" />
+            </a>
+            <a href="{{ site.social.twitter }}" target="_blank" title="Twitter">
+                <img src="/assets/icons/twitter.svg" alt="Twitter" width="24" height="24" />
+            </a>
+            <a href="{{ site.social.instagram }}" target="_blank" title="Instagram">
+                <img src="/assets/icons/instagram.svg" alt="Instagram" width="24" height="24" />
+            </a>
+            <a href="{{ site.social.github }}" target="_blank" title="GitHub">
+                <img src="/assets/icons/github.svg" alt="GitHub" width="24" height="24" />
+            </a>
+            <a href="{{ site.social.linkedin }}" target="_blank" title="LinkedIn">
+                <img src="/assets/icons/linkedin.svg" alt="LinkedIn" width="24" height="24" />
+            </a>
+            <a href="{{ site.social.blog }}" target="_blank" title="Blog">
+                <img src="/assets/icons/medium.svg" alt="Blog" width="24" height="24" />
+            </a>
+        </div>
+    </section>
+</main>
