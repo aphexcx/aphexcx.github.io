@@ -19,4 +19,3 @@ I'm currently exploring areas for my next project, so if you'd like to work toge
 - The [Jaw Epidemic](https://news.stanford.edu/stories/2020/07/toll-shrinking-jaws-human-health) is at the root of many of chronic "diseases of civilization"
 - Luck is [created](https://www.swyx.io/create-luck)
 - Sleep is a [skill](https://blueprint.bryanjohnson.com/blogs/news/how-i-fixed-my-terrible-sleep)
-
