@@ -18,12 +18,34 @@
                 <img src="/assets/profile.jpg" alt="Afik Cohen" class="logo-photo" />
                 <span>Afik&nbsp;Cohen</span>
             </a>
-            <ul class="nav-links">
-                <li><a href="/#about">About</a></li>
-                <li><a href="/#projects">Projects</a></li>
-                <li><a href="/#blog">Writing</a></li>
-                <li><a href="/#contact">Contact</a></li>
-            </ul>
+            <div class="nav-right">
+                <div class="nav-social-links">
+                    <a href="mailto:{{ site.email }}" title="Email">
+                        <img src="/assets/icons/envelope.svg" alt="Email" width="24" height="24" />
+                    </a>
+                    <a href="{{ site.social.twitter }}" target="_blank" title="Twitter">
+                        <img src="/assets/icons/twitter.svg" alt="Twitter" width="24" height="24" />
+                    </a>
+                    <a href="{{ site.social.instagram }}" target="_blank" title="Instagram">
+                        <img src="/assets/icons/instagram.svg" alt="Instagram" width="24" height="24" />
+                    </a>
+                    <a href="{{ site.social.github }}" target="_blank" title="GitHub">
+                        <img src="/assets/icons/github.svg" alt="GitHub" width="24" height="24" />
+                    </a>
+                    <a href="{{ site.social.linkedin }}" target="_blank" title="LinkedIn">
+                        <img src="/assets/icons/linkedin.svg" alt="LinkedIn" width="24" height="24" />
+                    </a>
+                    <a href="{{ site.social.blog }}" target="_blank" title="Blog">
+                        <img src="/assets/icons/medium.svg" alt="Blog" width="24" height="24" />
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/#about">About</a></li>
+                    <li><a href="/#projects">Projects</a></li>
+                    <li><a href="/#blog">Writing</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -34,5 +56,7 @@
     </footer>
 
     <script src="/js/main.js"></script>
+    <script src="/js/sparkles.js"></script>
+    <script src="/js/header-collapse.js"></script>
 </body>
 </html>
