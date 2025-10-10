@@ -28,7 +28,14 @@
 
 body {
     font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-    background-color: var(--color-bg);
+    background-color: #1a1410;
+    background-image:
+        linear-gradient(rgba(20, 15, 10, 0.6), rgba(20, 15, 10, 0.6)),
+        url('/assets/AdobeStock_430235467.jpeg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
     color: var(--color-text);
     line-height: 1.6;
     scroll-behavior: smooth;
@@ -39,12 +46,12 @@ nav {
     position: sticky;
     top: 0;
     width: 100%;
-    background: rgba(42, 42, 74, 0.7);
+    background: rgba(30, 20, 12, 0.85);
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
     z-index: 1000;
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
 .nav-container {
@@ -180,7 +187,7 @@ nav .logo-photo {
 #hero {
     padding: 3rem 1.5rem 0rem;
     text-align: center;
-    background: var(--color-bg);
+    background: transparent;
 }
 
 #hero .social-links {
@@ -274,10 +281,12 @@ section {
 }
 
 section h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
     color: var(--color-primary);
     font-weight: 600;
+    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
 }
 
 /* Global link styling for markdown content */
@@ -296,6 +305,15 @@ main a:hover {
 #about p {
     margin-bottom: 1rem;
     max-width: 900px;
+}
+
+#about ul {
+    margin-left: 1rem;
+    list-style: disc;
+}
+
+#about ul li {
+    margin-bottom: 0.4rem;
 }
 
 #about a {
@@ -317,12 +335,17 @@ main a:hover {
 }
 
 .project-card {
-    background-color: var(--color-surface);
+    display: block;
+    background-color: rgba(30, 20, 12, 0.6);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid var(--color-border);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
 }
 
 .project-card:hover {

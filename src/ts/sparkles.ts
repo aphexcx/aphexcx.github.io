@@ -17,6 +17,8 @@ interface Particle {
 class SparkleEffect {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
+  private highlightCanvas: HTMLCanvasElement;
+  private highlightCtx: CanvasRenderingContext2D;
   private particles: Particle[] = [];
   private mouseX: number = 0;
   private mouseY: number = 0;
@@ -26,7 +28,19 @@ class SparkleEffect {
   private readonly GOLD_HUE = 45; // Gold color hue
 
   constructor() {
-    // Create canvas
+    // Create highlight canvas (behind particles)
+    this.highlightCanvas = document.createElement('canvas');
+    this.highlightCanvas.style.position = 'fixed';
+    this.highlightCanvas.style.top = '0';
+    this.highlightCanvas.style.left = '0';
+    this.highlightCanvas.style.pointerEvents = 'none';
+    this.highlightCanvas.style.zIndex = '1';
+    this.highlightCanvas.style.mixBlendMode = 'soft-light';
+    document.body.appendChild(this.highlightCanvas);
+
+    this.highlightCtx = this.highlightCanvas.getContext('2d')!;
+
+    // Create sparkle canvas (on top)
     this.canvas = document.createElement('canvas');
     this.canvas.style.position = 'fixed';
     this.canvas.style.top = '0';
@@ -50,6 +64,8 @@ class SparkleEffect {
   private resize(): void {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
+    this.highlightCanvas.width = window.innerWidth;
+    this.highlightCanvas.height = window.innerHeight;
   }
 
   private onMouseMove(e: MouseEvent): void {
@@ -152,11 +168,78 @@ class SparkleEffect {
     }
   }
 
+  private drawSpecularHighlight(): void {
+    // Clear highlight canvas
+    this.highlightCtx.clearRect(0, 0, this.highlightCanvas.width, this.highlightCanvas.height);
+
+    // Draw cursor highlight
+    const baseRadius = 180;
+    const innerRadius = 60;
+
+    // Main cursor highlight - warm gold glow
+    const mainGradient = this.highlightCtx.createRadialGradient(
+      this.mouseX, this.mouseY, 0,
+      this.mouseX, this.mouseY, baseRadius
+    );
+    mainGradient.addColorStop(0, 'rgba(255, 230, 180, 0.25)');
+    mainGradient.addColorStop(0.3, 'rgba(255, 215, 150, 0.15)');
+    mainGradient.addColorStop(0.6, 'rgba(212, 175, 55, 0.08)');
+    mainGradient.addColorStop(0.85, 'rgba(212, 175, 55, 0.02)');
+    mainGradient.addColorStop(1, 'rgba(212, 175, 55, 0)');
+
+    this.highlightCtx.fillStyle = mainGradient;
+    this.highlightCtx.beginPath();
+    this.highlightCtx.arc(this.mouseX, this.mouseY, baseRadius, 0, Math.PI * 2);
+    this.highlightCtx.fill();
+
+    // Bright center cursor highlight
+    const centerGradient = this.highlightCtx.createRadialGradient(
+      this.mouseX, this.mouseY, 0,
+      this.mouseX, this.mouseY, innerRadius
+    );
+    centerGradient.addColorStop(0, 'rgba(255, 245, 220, 0.4)');
+    centerGradient.addColorStop(0.4, 'rgba(255, 235, 190, 0.2)');
+    centerGradient.addColorStop(0.7, 'rgba(255, 220, 160, 0.08)');
+    centerGradient.addColorStop(1, 'rgba(255, 215, 150, 0)');
+
+    this.highlightCtx.fillStyle = centerGradient;
+    this.highlightCtx.beginPath();
+    this.highlightCtx.arc(this.mouseX, this.mouseY, innerRadius, 0, Math.PI * 2);
+    this.highlightCtx.fill();
+
+    // Draw individual particle highlights
+    for (const p of this.particles) {
+      const alpha = p.life;
+      const particleRadius = p.size * 15 * alpha; // Scale highlight with particle life
+
+      // Each particle emits its own warm light on the wood
+      const particleGradient = this.highlightCtx.createRadialGradient(
+        p.x, p.y, 0,
+        p.x, p.y, particleRadius
+      );
+
+      // Use the particle's hue for color variation
+      const h = p.hue;
+      particleGradient.addColorStop(0, `hsla(${h}, 100%, 85%, ${alpha * 0.3})`);
+      particleGradient.addColorStop(0.4, `hsla(${h}, 100%, 75%, ${alpha * 0.15})`);
+      particleGradient.addColorStop(0.7, `hsla(${h}, 80%, 65%, ${alpha * 0.08})`);
+      particleGradient.addColorStop(1, `hsla(${h}, 80%, 60%, 0)`);
+
+      this.highlightCtx.fillStyle = particleGradient;
+      this.highlightCtx.beginPath();
+      this.highlightCtx.arc(p.x, p.y, particleRadius, 0, Math.PI * 2);
+      this.highlightCtx.fill();
+    }
+  }
+
   private animate(): void {
     // Clear canvas
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // Update and draw
+    // Draw wood specular highlight
+    this.drawSpecularHighlight();
+
+    // Update and draw particles
     this.updateParticles();
     this.drawParticles();
 

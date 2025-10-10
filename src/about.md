@@ -9,10 +9,10 @@ Outside of computers (or rather, in concert with them), I am also a [DJ and arti
 
 I'm currently exploring areas for my next project, so if you'd like to work together, [get in touch](#contact):)
 
+
 ## Interests
 - Reinforcement learning, particularly the [big world hypothesis](https://khurramjaved.com/the_big_world_hypothesis.html)
 - Code AGI will be the first AGI we achieve and [capture 80% of the value of AGI](https://www.swyx.io/cognition#short-code-timelines-long-agi-timelines)
-
 
 ## Non-obvious discoveries that have made a profound difference in my life
 
