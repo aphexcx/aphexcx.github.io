@@ -282,11 +282,12 @@ section {
 
 section h2 {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.25rem;
     color: var(--color-primary);
     font-weight: 600;
     border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    line-height: 1.4;
 }
 
 /* Global link styling for markdown content */
@@ -309,6 +310,7 @@ main a:hover {
 
 #about ul {
     margin-left: 1rem;
+    margin-bottom: 1rem;
     list-style: disc;
 }
 
@@ -359,6 +361,16 @@ main a:hover {
     width: 100%;
     height: 180px;
     object-fit: cover;
+}
+
+.project-card.align-top img,
+.project-card.align-top video {
+    object-position: top;
+}
+
+.project-card.align-bottom img,
+.project-card.align-bottom video {
+    object-position: bottom;
 }
 
 .project-card h3 {

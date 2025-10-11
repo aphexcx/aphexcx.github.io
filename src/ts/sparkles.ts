@@ -57,6 +57,11 @@ class SparkleEffect {
     document.addEventListener('mousemove', (e) => this.onMouseMove(e));
     document.addEventListener('click', (e) => this.onClick(e));
 
+    // Touch event listeners for mobile
+    document.addEventListener('touchmove', (e) => this.onTouchMove(e), { passive: true });
+    document.addEventListener('touchstart', (e) => this.onTouchStart(e), { passive: true });
+    document.addEventListener('touchend', (e) => this.onTouchEnd(e));
+
     // Start animation loop
     this.animate();
   }
@@ -81,6 +86,35 @@ class SparkleEffect {
 
   private onClick(e: MouseEvent): void {
     this.createExplosion(e.clientX, e.clientY);
+  }
+
+  private onTouchMove(e: TouchEvent): void {
+    if (e.touches.length > 0) {
+      const touch = e.touches[0];
+      this.mouseX = touch.clientX;
+      this.mouseY = touch.clientY;
+
+      const now = Date.now();
+      if (now - this.lastTrailTime > this.TRAIL_INTERVAL) {
+        this.createTrailParticle(touch.clientX, touch.clientY);
+        this.lastTrailTime = now;
+      }
+    }
+  }
+
+  private onTouchStart(e: TouchEvent): void {
+    if (e.touches.length > 0) {
+      const touch = e.touches[0];
+      this.mouseX = touch.clientX;
+      this.mouseY = touch.clientY;
+    }
+  }
+
+  private onTouchEnd(e: TouchEvent): void {
+    if (e.changedTouches.length > 0) {
+      const touch = e.changedTouches[0];
+      this.createExplosion(touch.clientX, touch.clientY);
+    }
   }
 
   private createTrailParticle(x: number, y: number): void {

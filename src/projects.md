@@ -4,12 +4,10 @@ permalink: false
 ---
 
 ## Projects I'm proud of
-
-Beyond my day job, I love exploring new ideas — from AI‑powered startups to interactive hardware and large‑scale art. Here are some highlights.
-
+    
 <div class="projects-grid">
 
-<a href="https://chatwithwave.com" target="_blank" class="project-card">
+<a href="https://chatwithwave.com" target="_blank" class="project-card align-bottom">
 <img src="/assets/wave-chat.gif" alt="Wave" />
 <h3>Wave</h3>
 <p>At <strong>Fairbrook AI</strong> I'm building <em>Wave</em>, a social voice app that merges live chat, text and recorded voice so you never have to schedule calls. Chatlines are always on and friends can drop in whenever.</p>
@@ -28,7 +26,7 @@ Beyond my day job, I love exploring new ideas — from AI‑powered startups to 
 </a>
 
 <a href="https://aphex.cx/sheepgpt-the-art-car-that-talks-back-using-llama2-70b-b90e41ba72d2" target="_blank" class="project-card">
-<img src="/assets/sheepgpt.png" alt="SheepGPT" />
+<video src="/assets/sheepgpt.mp4" alt="SheepGPT" autoplay loop muted playsinline></video>
 <h3>SheepGPT</h3>
 <p>I turned my mutant art car into a talking sheep using <em>Llama‑2 70B</em>. The on‑board computer generates quirky responses to burners in real time and speaks them through a glowing LED speech bubble.</p>
 </a>
@@ -39,8 +37,8 @@ Beyond my day job, I love exploring new ideas — from AI‑powered startups to 
 <p>A 76K LED sheep art car that roams the playa. I've contributed to the shader software (Kotlin Native, C/C++ and GLSL) and rigged the subwoofers and line array speakers on her.</p>
 </a>
 
-<a href="https://aphex.cx/how-i-built-a-bluetooth-connected-1-meter-wide-840-led-marquee-totem-for-edc-and-how-you-can-6a4aaf06cc9d" target="_blank" class="project-card">
-<img src="/assets/led-totem.png" alt="LED Totem" />
+<a href="https://aphex.cx/how-i-built-a-bluetooth-connected-1-meter-wide-840-led-marquee-totem-for-edc-and-how-you-can-6a4aaf06cc9d" target="_blank" class="project-card align-top">
+<img src="/assets/energysign.gif" alt="LED Totem" />
 <h3>LED Totem</h3>
 <p>A metre‑long Bluetooth‑controlled totem with 840 RGB LEDs. I built the PCB, firmware and Android app from scratch to send animations wirelessly at festivals and raves.</p>
 </a>

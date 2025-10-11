@@ -12,10 +12,10 @@ I'm currently exploring areas for my next project, so if you'd like to work toge
 
 ## Interests
 - Reinforcement learning, particularly the [big world hypothesis](https://khurramjaved.com/the_big_world_hypothesis.html)
-- Code AGI will be the first AGI we achieve and [capture 80% of the value of AGI](https://www.swyx.io/cognition#short-code-timelines-long-agi-timelines)
+- Code AGI as the first AGI we achieve, [capturing 80% of the value of AGI](https://www.swyx.io/cognition#short-code-timelines-long-agi-timelines)
+- Voice agent having conversations is nontrivial mainly because [turn-detection is non-trivial](https://github.com/pipecat-ai/smart-turn)
 
 ## Non-obvious discoveries that have made a profound difference in my life
-
 - The [Jaw Epidemic](https://news.stanford.edu/stories/2020/07/toll-shrinking-jaws-human-health) is at the root of many of chronic "diseases of civilization"
 - Luck is [created](https://www.swyx.io/create-luck)
 - Sleep is a [skill](https://blueprint.bryanjohnson.com/blogs/news/how-i-fixed-my-terrible-sleep)
