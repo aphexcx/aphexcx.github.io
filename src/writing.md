@@ -13,4 +13,4 @@ I enjoy sharing what I learn about engineering, hardware hacking and AI. Here ar
 <li><a href="https://aphex.cx/the-pixel-2xl-is-a-phone-that-cant-take-videos-or-play-audio" target="_blank">The Pixel 2 XL: a phone that can't take videos or play audio</a></li>
 </ul>
 
-Read more on [my blog](https://aphex.cx).
+Read more on [my Medium](https://aphex.cx).
