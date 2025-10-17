@@ -14,12 +14,26 @@ interface Particle {
   hue: number;
 }
 
+interface OrbitalParticle {
+  angle: number; // Current angle in orbit (radians)
+  orbitalRadius: number; // Distance from orbit center
+  angularVelocity: number; // Rotation speed (radians per frame)
+  spiralSpeed: number; // How fast it spirals inward
+  centerX: number; // Orbit center X (follows cursor)
+  centerY: number; // Orbit center Y (follows cursor)
+  life: number;
+  maxLife: number;
+  size: number;
+  hue: number;
+}
+
 class SparkleEffect {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private highlightCanvas: HTMLCanvasElement;
   private highlightCtx: CanvasRenderingContext2D;
   private particles: Particle[] = [];
+  private orbitalParticles: OrbitalParticle[] = [];
   private mouseX: number = 0;
   private mouseY: number = 0;
   private lastTrailTime: number = 0;
@@ -29,6 +43,15 @@ class SparkleEffect {
   private touchStartX: number = 0;
   private touchStartY: number = 0;
   private readonly TAP_THRESHOLD = 10; // px - max distance for tap vs swipe
+
+  // Orbital particle system
+  private isPressed: boolean = false;
+  private pressStartTime: number = 0;
+  private lastOrbitSpawnTime: number = 0;
+  private readonly ORBIT_SPAWN_INTERVAL = 50; // ms between orbital particle spawns
+  private readonly HOLD_THRESHOLD = 100; // ms - minimum hold time to start orbital accumulation
+  private readonly MIN_STABLE_ORBIT = 12; // px - minimum stable orbit radius (asymptotic approach)
+  private readonly MAX_ORBITAL_PARTICLES = 90; // Maximum orbital particles to prevent performance issues
 
   constructor() {
     // Create highlight canvas (behind particles)
@@ -58,6 +81,8 @@ class SparkleEffect {
     // Event listeners
     window.addEventListener('resize', () => this.resize());
     document.addEventListener('mousemove', (e) => this.onMouseMove(e));
+    document.addEventListener('mousedown', (e) => this.onMouseDown(e));
+    document.addEventListener('mouseup', (e) => this.onMouseUp(e));
     document.addEventListener('click', (e) => this.onClick(e));
 
     // Touch event listeners for mobile
@@ -87,8 +112,30 @@ class SparkleEffect {
     }
   }
 
+  private onMouseDown(e: MouseEvent): void {
+    this.isPressed = true;
+    this.pressStartTime = Date.now();
+    this.mouseX = e.clientX;
+    this.mouseY = e.clientY;
+  }
+
+  private onMouseUp(e: MouseEvent): void {
+    const holdDuration = Date.now() - this.pressStartTime;
+    this.isPressed = false;
+
+    // If held long enough and accumulated orbital particles, disperse them
+    if (holdDuration >= this.HOLD_THRESHOLD && this.orbitalParticles.length > 0) {
+      this.disperseOrbitalParticles();
+    }
+    // Note: onClick will still fire for quick clicks and create explosion
+  }
+
   private onClick(e: MouseEvent): void {
-    this.createExplosion(e.clientX, e.clientY);
+    // Only explode if it was a quick click (not a hold)
+    const holdDuration = Date.now() - this.pressStartTime;
+    if (holdDuration < this.HOLD_THRESHOLD) {
+      this.createExplosion(e.clientX, e.clientY);
+    }
   }
 
   private onTouchMove(e: TouchEvent): void {
@@ -112,21 +159,28 @@ class SparkleEffect {
       this.mouseY = touch.clientY;
       this.touchStartX = touch.clientX;
       this.touchStartY = touch.clientY;
+      this.isPressed = true;
+      this.pressStartTime = Date.now();
     }
   }
 
   private onTouchEnd(e: TouchEvent): void {
     if (e.changedTouches.length > 0) {
       const touch = e.changedTouches[0];
+      this.isPressed = false;
 
       // Calculate distance moved since touch start
       const dx = touch.clientX - this.touchStartX;
       const dy = touch.clientY - this.touchStartY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      // Only create explosion if it's a tap (minimal movement), not a swipe
+      // If it's a tap (minimal movement), create explosion
       if (distance < this.TAP_THRESHOLD) {
         this.createExplosion(touch.clientX, touch.clientY);
+      }
+      // If it's a swipe and we have orbital particles, disperse them
+      else if (this.orbitalParticles.length > 0) {
+        this.disperseOrbitalParticles();
       }
     }
   }
@@ -169,6 +223,47 @@ class SparkleEffect {
     }
   }
 
+  private spawnOrbitalParticles(): void {
+    const now = Date.now();
+
+    // Only spawn if pressed and enough time has passed
+    if (!this.isPressed) return;
+    if (now - this.lastOrbitSpawnTime < this.ORBIT_SPAWN_INTERVAL) return;
+    if (now - this.pressStartTime < this.HOLD_THRESHOLD) return;
+
+    // Cap at maximum particles to prevent performance issues
+    if (this.orbitalParticles.length >= this.MAX_ORBITAL_PARTICLES) return;
+
+    this.lastOrbitSpawnTime = now;
+
+    // Spawn 2-3 particles per interval
+    const spawnCount = 2 + Math.floor(Math.random() * 2);
+
+    for (let i = 0; i < spawnCount; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const orbitalRadius = 80 + Math.random() * 40; // Start at 80-120px radius
+
+      // Angular velocity: faster for smaller radii (like orbital mechanics)
+      // v = sqrt(GM/r), so angular velocity ∝ 1/sqrt(r)
+      const angularVelocity = (0.05 + Math.random() * 0.03) / Math.sqrt(orbitalRadius / 80);
+
+      const orbitalParticle: OrbitalParticle = {
+        angle,
+        orbitalRadius,
+        angularVelocity,
+        spiralSpeed: 0.3 + Math.random() * 0.2, // Spiral inward at 0.3-0.5 px per frame
+        centerX: this.mouseX,
+        centerY: this.mouseY,
+        life: 1,
+        maxLife: 1,
+        size: Math.random() * 2.5 + 1.5,
+        hue: this.GOLD_HUE + (Math.random() - 0.5) * 15
+      };
+
+      this.orbitalParticles.push(orbitalParticle);
+    }
+  }
+
   private updateParticles(): void {
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
@@ -194,6 +289,69 @@ class SparkleEffect {
     }
   }
 
+  private updateOrbitalParticles(): void {
+    for (let i = this.orbitalParticles.length - 1; i >= 0; i--) {
+      const p = this.orbitalParticles[i];
+
+      // Update orbit center to follow cursor
+      p.centerX = this.mouseX;
+      p.centerY = this.mouseY;
+
+      // Rotate around orbit
+      p.angle += p.angularVelocity;
+
+      // Asymptotic spiral toward minimum stable orbit
+      // Fast when far from min radius, slow when close, never quite reaching it
+      if (p.orbitalRadius > this.MIN_STABLE_ORBIT) {
+        p.orbitalRadius -= (p.orbitalRadius - this.MIN_STABLE_ORBIT) * 0.015;
+      }
+
+      // Add orbital perturbations for "air resistance" / imperfect orbits
+      // Small random variations create organic wobble
+      p.angularVelocity += (Math.random() - 0.5) * 0.001;
+
+      // Note: Particles persist until manually dispersed (no fade-out or removal)
+    }
+  }
+
+  private disperseOrbitalParticles(): void {
+    // Convert each orbital particle to a regular particle with realistic physics
+    for (const op of this.orbitalParticles) {
+      // Calculate current position
+      const x = op.centerX + Math.cos(op.angle) * op.orbitalRadius;
+      const y = op.centerY + Math.sin(op.angle) * op.orbitalRadius;
+
+      // Tangent velocity (perpendicular to radius)
+      // Tangent direction is angle + 90 degrees
+      const tangentAngle = op.angle + Math.PI / 2;
+      const orbitalSpeed = op.angularVelocity * op.orbitalRadius;
+
+      // Add outward radial velocity for dispersion
+      const radialSpeed = 2 + Math.random() * 3;
+
+      // Combine tangent and radial velocities
+      const vx = Math.cos(tangentAngle) * orbitalSpeed + Math.cos(op.angle) * radialSpeed;
+      const vy = Math.sin(tangentAngle) * orbitalSpeed + Math.sin(op.angle) * radialSpeed;
+
+      // Create regular particle with the calculated velocity
+      const particle: Particle = {
+        x,
+        y,
+        vx,
+        vy,
+        life: op.life,
+        maxLife: op.maxLife,
+        size: op.size,
+        hue: op.hue
+      };
+
+      this.particles.push(particle);
+    }
+
+    // Clear all orbital particles
+    this.orbitalParticles = [];
+  }
+
   private drawParticles(): void {
     for (const p of this.particles) {
       const alpha = p.life;
@@ -212,6 +370,32 @@ class SparkleEffect {
       this.ctx.fillStyle = `hsla(${p.hue}, 100%, 90%, ${alpha})`;
       this.ctx.beginPath();
       this.ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+      this.ctx.fill();
+    }
+  }
+
+  private drawOrbitalParticles(): void {
+    for (const p of this.orbitalParticles) {
+      // Convert polar to cartesian coordinates
+      const x = p.centerX + Math.cos(p.angle) * p.orbitalRadius;
+      const y = p.centerY + Math.sin(p.angle) * p.orbitalRadius;
+
+      const alpha = p.life;
+      const size = p.size * p.life;
+
+      // Outer glow
+      const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, size * 3);
+      gradient.addColorStop(0, `hsla(${p.hue}, 100%, 70%, ${alpha * 0.8})`);
+      gradient.addColorStop(0.5, `hsla(${p.hue}, 100%, 50%, ${alpha * 0.3})`);
+      gradient.addColorStop(1, `hsla(${p.hue}, 100%, 30%, 0)`);
+
+      this.ctx.fillStyle = gradient;
+      this.ctx.fillRect(x - size * 3, y - size * 3, size * 6, size * 6);
+
+      // Bright center
+      this.ctx.fillStyle = `hsla(${p.hue}, 100%, 90%, ${alpha})`;
+      this.ctx.beginPath();
+      this.ctx.arc(x, y, size, 0, Math.PI * 2);
       this.ctx.fill();
     }
   }
@@ -278,18 +462,49 @@ class SparkleEffect {
       this.highlightCtx.arc(p.x, p.y, particleRadius, 0, Math.PI * 2);
       this.highlightCtx.fill();
     }
+
+    // Draw orbital particle highlights
+    for (const p of this.orbitalParticles) {
+      const x = p.centerX + Math.cos(p.angle) * p.orbitalRadius;
+      const y = p.centerY + Math.sin(p.angle) * p.orbitalRadius;
+      const alpha = p.life;
+      const particleRadius = p.size * 15 * alpha;
+
+      const particleGradient = this.highlightCtx.createRadialGradient(
+        x, y, 0,
+        x, y, particleRadius
+      );
+
+      const h = p.hue;
+      particleGradient.addColorStop(0, `hsla(${h}, 100%, 85%, ${alpha * 0.3})`);
+      particleGradient.addColorStop(0.4, `hsla(${h}, 100%, 75%, ${alpha * 0.15})`);
+      particleGradient.addColorStop(0.7, `hsla(${h}, 80%, 65%, ${alpha * 0.08})`);
+      particleGradient.addColorStop(1, `hsla(${h}, 80%, 60%, 0)`);
+
+      this.highlightCtx.fillStyle = particleGradient;
+      this.highlightCtx.beginPath();
+      this.highlightCtx.arc(x, y, particleRadius, 0, Math.PI * 2);
+      this.highlightCtx.fill();
+    }
   }
 
   private animate(): void {
     // Clear canvas
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+    // Spawn orbital particles if holding down
+    this.spawnOrbitalParticles();
+
     // Draw wood specular highlight
     this.drawSpecularHighlight();
 
-    // Update and draw particles
+    // Update and draw regular particles
     this.updateParticles();
     this.drawParticles();
+
+    // Update and draw orbital particles
+    this.updateOrbitalParticles();
+    this.drawOrbitalParticles();
 
     // Continue loop
     requestAnimationFrame(() => this.animate());
