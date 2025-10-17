@@ -5,10 +5,7 @@ permalink: false
 ## About
 Hi, I'm Afik (rhymes with `seek`)! I'm an SF-based builder and until recently, co-founded [Fairbrook AI](https://fairbrook.ai). Before that, I co-founded [Codeflash](https://codeflash.ai) and was an early employee at [Perplexity](https://perplexity.ai).
 
-Outside of computers (or rather, in concert with them), I am also a [DJ, music producer & artist](https://www.instagram.com/aphexcx/), and have worked on several large interactive art installations with tens of thousands of LEDs.
-
-I'm currently exploring areas for my next project, so if you'd like to work together, [get in touch](#contact):)
-
+I'm currently exploring areas for my next project/role, so if you'd like to work together, [get in touch](#contact):)
 
 ## Problems I'm currently interested in
 - Reinforcement learning, particularly the [big world hypothesis](https://khurramjaved.com/the_big_world_hypothesis.html)
@@ -20,3 +17,9 @@ I'm currently exploring areas for my next project, so if you'd like to work toge
 - The [Jaw Epidemic](https://news.stanford.edu/stories/2020/07/toll-shrinking-jaws-human-health) is at the root of many of chronic "diseases of civilization"
 - Luck is [created](https://www.swyx.io/create-luck)
 - Sleep is a [skill](https://blueprint.bryanjohnson.com/blogs/news/how-i-fixed-my-terrible-sleep)
+- You are the average of the top 5 people you spend the most time with
+- Lying and withholding is [the major source of all human stress and suffering](https://www.amazon.com/Radical-Honesty-Transform-Telling-Truth/dp/0440507545)
+- All problems are [interpersonal relationship problems](https://www.amazon.com/The-Courage-to-Be-Disliked-audiobook/dp/B07BRPW98K/)
+
+## Art & Music
+Outside of computers (or rather, in concert with them), I am also a [dj, music producer & artist](https://www.instagram.com/aphexcx/), and have worked on several large interactive art installations with tens of thousands of LEDs. Check out my projects below for some of them.

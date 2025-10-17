@@ -26,6 +26,9 @@ class SparkleEffect {
   private readonly TRAIL_INTERVAL = 8; // ms between trail particles (reduced for more particles)
   private readonly TRAIL_PARTICLES_PER_EMIT = 3; // Multiple particles per emit
   private readonly GOLD_HUE = 45; // Gold color hue
+  private touchStartX: number = 0;
+  private touchStartY: number = 0;
+  private readonly TAP_THRESHOLD = 10; // px - max distance for tap vs swipe
 
   constructor() {
     // Create highlight canvas (behind particles)
@@ -107,13 +110,24 @@ class SparkleEffect {
       const touch = e.touches[0];
       this.mouseX = touch.clientX;
       this.mouseY = touch.clientY;
+      this.touchStartX = touch.clientX;
+      this.touchStartY = touch.clientY;
     }
   }
 
   private onTouchEnd(e: TouchEvent): void {
     if (e.changedTouches.length > 0) {
       const touch = e.changedTouches[0];
-      this.createExplosion(touch.clientX, touch.clientY);
+
+      // Calculate distance moved since touch start
+      const dx = touch.clientX - this.touchStartX;
+      const dy = touch.clientY - this.touchStartY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      // Only create explosion if it's a tap (minimal movement), not a swipe
+      if (distance < this.TAP_THRESHOLD) {
+        this.createExplosion(touch.clientX, touch.clientY);
+      }
     }
   }
 
