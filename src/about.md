@@ -3,9 +3,13 @@ tags: about
 permalink: false
 ---
 ## About
-Hi, I'm Afik (rhymes with `seek`)! I'm an SF-based builder and until recently, co-founded [Fairbrook AI](https://fairbrook.ai). Before that, I co-founded [Codeflash](https://codeflash.ai) and was an early employee at [Perplexity](https://perplexity.ai).
+Hi, I'm **Afik**! (/ɑˈfiːk/; *rhymes with "seek"*)
+- Most recently co-founder & CTO [Fairbrook AI](https://fairbrook.ai) 
+- Co-founded [Codeflash](https://codeflash.ai) 
+- Worked at [Morph Labs](morph.so) 
+- Early technical staff at [Perplexity](https://perplexity.ai) 
 
-I'm currently exploring areas for my next project/role, so if you'd like to work together, [get in touch](#contact):)
+Currently open to research engineering roles in SF (in-person/hybrid) - <a href="mailto:&#97;&#112;&#104;&#101;&#120;&#64;&#97;&#112;&#104;&#101;&#120;&#46;&#99;&#120;">let's work together</a>
 
 ## Problems I'm currently interested in
 - Reinforcement learning, particularly the [big world hypothesis](https://khurramjaved.com/the_big_world_hypothesis.html)
