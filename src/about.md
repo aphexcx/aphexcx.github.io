@@ -26,4 +26,4 @@ Currently open to research engineering roles in SF (in-person/hybrid) - <a href=
 - All problems are [interpersonal relationship problems](https://www.amazon.com/The-Courage-to-Be-Disliked-audiobook/dp/B07BRPW98K/)
 
 ## Art & Music
-Outside of computers (or rather, in concert with them), I am also a [dj, music producer & artist](https://www.instagram.com/aphexcx/), and have worked on several large interactive art installations with tens of thousands of LEDs. Check out my projects below for some of them.
+Outside of computers (or rather, in concert with them), I am also a [dj, music producer & artist](https://www.instagram.com/aphexcx/), and have worked on several large interactive art installations with tens of thousands of LEDs. I've taken many of these to [Burning Man](https://burningman.org/), where I'm one of the leads of the [BAAAHS art car](https://baaahs.org/) and volunteer as a [Black Rock Ranger](https://rangers.burningman.org/). 
