@@ -108,16 +108,60 @@ nav .logo-photo {
     transition: transform 0.3s ease;
 }
 
-.nav-social-links a img {
+/* Social icon styles - shared between nav and hero/contact sections */
+.nav-social-links a img,
+.social-links a img {
     width: 24px;
     height: 24px;
     filter: invert(73%) sepia(45%) saturate(446%) hue-rotate(5deg) brightness(93%) contrast(87%);
     transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-.nav-social-links a:hover img {
-    filter: invert(83%) sepia(55%) saturate(546%) hue-rotate(5deg) brightness(103%) contrast(97%);
+.nav-social-links a:hover img,
+.social-links a:hover img {
     transform: scale(1.15);
+}
+
+/* Email - Gold */
+.nav-social-links a:hover img[src*="envelope"],
+.social-links a:hover img[src*="envelope"] {
+    filter: invert(83%) sepia(55%) saturate(546%) hue-rotate(5deg) brightness(103%) contrast(97%) drop-shadow(0 0 8px rgba(212, 175, 55, 0.8));
+}
+
+/* X (Twitter) - Twitter Blue */
+.nav-social-links a:hover img[src*="x-twitter"],
+.social-links a:hover img[src*="x-twitter"] {
+    filter: invert(58%) sepia(82%) saturate(2420%) hue-rotate(177deg) brightness(99%) contrast(101%) drop-shadow(0 0 8px rgba(29, 161, 242, 0.8));
+}
+
+/* Instagram - Pink/Purple */
+.nav-social-links a:hover img[src*="instagram"],
+.social-links a:hover img[src*="instagram"] {
+    filter: invert(47%) sepia(89%) saturate(2476%) hue-rotate(315deg) brightness(92%) contrast(86%) drop-shadow(0 0 8px rgba(225, 48, 108, 0.8));
+}
+
+/* SoundCloud - Orange */
+.nav-social-links a:hover img[src*="soundcloud"],
+.social-links a:hover img[src*="soundcloud"] {
+    filter: invert(50%) sepia(100%) saturate(2000%) hue-rotate(0deg) brightness(100%) contrast(100%) drop-shadow(0 0 8px rgba(255, 85, 0, 0.8));
+}
+
+/* GitHub - Green */
+.nav-social-links a:hover img[src*="github"],
+.social-links a:hover img[src*="github"] {
+    filter: invert(39%) sepia(93%) saturate(686%) hue-rotate(92deg) brightness(93%) contrast(96%) drop-shadow(0 0 8px rgba(8, 135, 43, 0.8));
+}
+
+/* LinkedIn - Blue */
+.nav-social-links a:hover img[src*="linkedin"],
+.social-links a:hover img[src*="linkedin"] {
+    filter: invert(33%) sepia(91%) saturate(1559%) hue-rotate(182deg) brightness(95%) contrast(101%) drop-shadow(0 0 8px rgba(10, 102, 194, 0.8));
+}
+
+/* Medium - White */
+.nav-social-links a:hover img[src*="medium"],
+.social-links a:hover img[src*="medium"] {
+    filter: invert(100%) brightness(200%) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
 }
 
 .nav-links {
@@ -417,20 +461,7 @@ main a:hover {
     transition: transform 0.3s ease;
 }
 
-.social-links a img {
-    width: 24px;
-    height: 24px;
-    /* Tint icons to gold */
-    filter: invert(73%) sepia(45%) saturate(446%) hue-rotate(5deg) brightness(93%) contrast(87%);
-    transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-.social-links a:hover img {
-    /* Brighter gold on hover */
-    filter: invert(83%) sepia(55%) saturate(546%) hue-rotate(5deg) brightness(103%) contrast(97%);
-    transform: scale(1.15);
-    drop-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
-}
+/* Icon styles defined above with .nav-social-links */
 
 footer {
     text-align: center;
